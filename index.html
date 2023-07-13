@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+    body {
+        max-width: 700px;
+        margin: auto;
+        font-family: monospace;
+    }
+    p {
+        border-radius: 20px;
+        padding: 1em;
+        color: white;
+    }
+    .Bot {
+        background-color: #489;
+    }
+    .User {
+        background-color: #157;
+    }
+    .Error {
+        background-color: #E66;
+    }
+    div {
+/*        
+        border: 1px black solid;
+        width: auto;*/
+    }
+</style>
+<div id=Main >
+    <div id=Chat>
+    </div>
+    <textarea id=Promt cols=3 style="width: 100%;"></textarea>
+    <br/>
+    <button id=Button>🍀</button>
+</div>
+<script>
+    let Key = 0;
+    let Crypto = crypto.subtle;
+
+    // const _crypto = (fun, ...args) => {
+    //     a = (async () => await crypto.subtle[fun](...args))();
+    //     return a;
+    // };
+
+
+    // async function generate() {
+
+    //     _crypto.generateKey(
+    //       {
+    //         name: "ECDSA",
+    //         namedCurve: "P-384",
+    //       },
+    //       true,
+    //       ["sign", "verify"]
+    // );
+    
+    // async function sign()
+
+    Button.onclick = async (x) => {
+        [command, ...promt] = Promt.value.split(/\s/).filter(n => n);
+        Chat.innerHTML += `<p class=User>${command + promt.join` `}</p>`;
+        let fn = {
+            'generate': async (x) => {
+                Key = await Crypto.generateKey(
+                      { name: "ECDSA", namedCurve: "P-256"},
+                      1, ["sign"]);
+                let result = await Crypto.exportKey("jwk", Key.privateKey);
+                console.log(result);
+
+                return `login x ${result.x} y ${result.y} d ${result.d}`
+            }
+        }[command];
+        let result = await fn(promt);
+        Chat.innerHTML += `<p class=Bot>${result}</p>`;
+
+    //     console.log(key);
+    //     console.log(await window.crypto.subtle.exportKey("jwk", key.privateKey));
+
+    //     console.log("clicked");
+
+    //     
+
+    //     Chat.innerHTML += "<div>" + promt +" </div>";
+    //     Promt.value = '';
+    };
+
+    function main() {
+        Key = 
+
+        console.log(key);
+        // console.log(await window.crypto.subtle.exportKey("jwk", key.value.privateKey));
+        // console.log(await window.crypto.subtle.exportKey("jwk", key.publicKey));
+
+        // console.log(await window.crypto.subtle.exportKey("raw", key.privateKey));
+        // console.log(await window.crypto.subtle.exportKey("raw", key.publicKey));
+    };
+    main();
+
+
+</script>
+</body>
+</html>
